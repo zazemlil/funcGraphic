@@ -19,7 +19,7 @@ class PyplotGraphic(Graphic):
             # adding graphs
             for item in self._funcs:
                 y = self._exec_func(item)
-                if isinstance(y, int):
+                if isinstance(y, int) or isinstance(y, float):
                     y = [y for i in range(len(self._x))]
                 
                 axes.plot(self._x, y)

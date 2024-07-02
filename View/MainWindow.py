@@ -10,3 +10,11 @@ class MainWindow(IWindow):
     @override
     def set_signal_show_graphic(self):
         pass
+
+    @override
+    def set_signal_add(self, arg):
+        pass
+
+    @override
+    def set_signal_remove(self, arg):
+        pass

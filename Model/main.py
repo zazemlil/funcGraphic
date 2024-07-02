@@ -26,7 +26,7 @@ if __name__ == '__main__':
                 graphic.remove(i)
             elif (i == "3"):
                 f = str(input("Введите функцию: "))
-                graphic.add(f.replace(" ", ""))
+                graphic.add(f)
             elif (i == "2"):
                 print(graphic.get_funcs())
             elif (i == "1"):

@@ -9,6 +9,7 @@ class Graphic:
         self._funcs = []
 
     def add(self, func):
+        func = func.replace(" ", "")
         self._funcs.append(func)
 
     def clear(self):
