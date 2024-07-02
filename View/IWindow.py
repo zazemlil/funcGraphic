@@ -12,3 +12,7 @@ class IWindow(metaclass=ABCMeta):
     @abstractmethod
     def set_signal_remove(self, arg):
         pass
+
+    @abstractmethod
+    def set_signal_clear(self, arg):
+        pass

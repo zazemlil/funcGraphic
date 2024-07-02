@@ -22,3 +22,8 @@ class MainWindow(IWindow):
     def set_signal_remove(self, arg):
         self.ui.pb_remove.clicked.connect(arg)
         pass
+
+    @override
+    def set_signal_clear(self, arg):
+        self.ui.pb_clear.clicked.connect(arg)
+        pass

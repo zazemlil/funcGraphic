@@ -6,12 +6,13 @@ class Controller:
         self._view = MainWindow()
         self._model = PyplotGraphic("PyplotGraphic Window", "Graphic", "axis X", "axis Y")
 
-        self._view.set_signal_add(self.add)
-        self._view.set_signal_remove(self.remove)
-        self._view.set_signal_show_graphic(self.show)
+        self._view.set_signal_add(self._add)
+        self._view.set_signal_remove(self._remove)
+        self._view.set_signal_show_graphic(self._show)
+        self._view.set_signal_clear(self._clear)
 
 
-    def add(self):
+    def _add(self):
         new_item = self._view.ui.lineEdit.text()
         new_item = new_item.replace(" ", "")
         if new_item != "":
@@ -20,13 +21,16 @@ class Controller:
             self._model.add(new_item)
 
 
-    def remove(self):
+    def _remove(self):
         selected = self._view.ui.listBox.selectedItems()
         for item in selected:
             row = self._view.ui.listBox.row(item)
             self._view.ui.listBox.takeItem(row)
             self._model.remove(row)
 
+    def _clear(self):
+        self._view.ui.listBox.clear()
+        self._model.clear()
 
-    def show(self):
+    def _show(self):
         self._model.draw()
