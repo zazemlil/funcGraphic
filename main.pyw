@@ -1,11 +1,11 @@
 import sys
-from View import MainWindow as mw
 from PyQt6.QtWidgets import QApplication
+from Controller.Controller import Controller
 
 def main():
     app = QApplication( sys.argv )
     
-    main_window = mw.MainWindow()
+    controller = Controller()
 
     app.exec()
 

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.pylab as plab 
 from numpy import *
 
-from Graphic import Graphic
+from Model.Graphic import Graphic
 
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
