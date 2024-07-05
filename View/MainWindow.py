@@ -11,19 +11,15 @@ class MainWindow(IWindow):
     @override
     def set_signal_show_graphic(self, arg):
         self.ui.pb_show.clicked.connect(arg)
-        pass
 
     @override
     def set_signal_add(self, arg):
         self.ui.pb_add.clicked.connect(arg)
-        pass
 
     @override
     def set_signal_remove(self, arg):
         self.ui.pb_remove.clicked.connect(arg)
-        pass
 
     @override
     def set_signal_clear(self, arg):
         self.ui.pb_clear.clicked.connect(arg)
-        pass
