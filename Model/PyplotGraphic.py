@@ -18,11 +18,16 @@ class PyplotGraphic(Graphic):
             
             # adding graphs
             for item in self._funcs:
-                y = self._exec_func(item)
-                if isinstance(y, int) or isinstance(y, float):
-                    y = [y for i in range(len(self._x))]
-                
-                axes.plot(self._x, y)
+                y, x = self._exec_func(item)
+                if x == "-":
+                    if isinstance(y, int) or isinstance(y, float):
+                        print(2)
+                        y = [y for i in range(len(self._x))]
+                    axes.plot(self._x, y)
+                else:
+                    if isinstance(x, int) or isinstance(x, float):
+                        x = [x for i in range(len(self._x))]
+                    axes.plot(x, self._x)
 
             # configure graphic
             self._configure_graphic(axes)
@@ -33,9 +38,13 @@ class PyplotGraphic(Graphic):
                 
     def _exec_func(self, item):
         x = self._x
+        ldic = locals()
         with errstate(divide='ignore', invalid='ignore'):
-            exec(item)
-        return locals()['y']
+            exec(item, globals(), ldic)
+            if "y" in ldic:
+                return ldic['y'], "-"
+            else:
+                return "-", ldic['x']
 
     def _configure_graphic(self, axes):
         fig = plab.gcf()
