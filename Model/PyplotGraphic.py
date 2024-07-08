@@ -7,7 +7,7 @@ from Model.Graphic import Graphic
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
-        self._x = linspace(-20, 20, 301)
+        self._x = linspace(-22, 22, 301)
         
     def draw(self):
         try:
@@ -21,13 +21,12 @@ class PyplotGraphic(Graphic):
                 y, x = self._exec_func(item)
                 if x == "-":
                     if isinstance(y, int) or isinstance(y, float):
-                        print(2)
                         y = [y for i in range(len(self._x))]
                     axes.plot(self._x, y)
                 else:
                     if isinstance(x, int) or isinstance(x, float):
                         x = [x for i in range(len(self._x))]
-                    axes.plot(x, self._x)
+                    axes.plot(x, linspace(-50, 50, 301))
 
             # configure graphic
             self._configure_graphic(axes)
