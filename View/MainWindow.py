@@ -6,6 +6,11 @@ class MainWindow(IWindow):
     def __init__(self):
         self.ui = lu.loadUi("Utilz/Windows/MainWindow.ui")
         self.ui.setFixedSize(self.ui.frameSize().width(), self.ui.frameSize().height())
+
+        urlLink="<a style=\"text-decoration: none\" href=\"https://numpy.org/doc/stable/reference/routines.math.html\">Справочник</a>"
+        self.ui.lb_info.setText(urlLink)
+        self.ui.lb_info.setOpenExternalLinks(True)
+
         self.ui.show()
 
     @override
