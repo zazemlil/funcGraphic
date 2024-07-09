@@ -1,14 +1,13 @@
 import matplotlib.pyplot as plt
 import matplotlib.pylab as plab 
 from numpy import *
-from sympy import symbols, Eq, solve
-
+import sympy as sp
 from Model.Graphic import Graphic
 
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
-        self._x = linspace(-22, 22, 301)
+        self._x = linspace(-22, 22, 501)
         
     def draw(self) -> None:
         try:
@@ -40,16 +39,30 @@ class PyplotGraphic(Graphic):
             self.notify({"error": str(error), "func": str(item), "index": self._funcs.index(item)})
                 
     def _solve_func(self, item) -> str:
-        x, y = symbols('x y')
+        x, y = sp.symbols('x y')
         item_half_1, item_half_2 = item[ : item.find("=")], item[item.find("=") + 1 : ]
-        equation = Eq(eval(item_half_1), eval(item_half_2))
+        
+        availableFunctions = {
+                            "x": x, "y": y, "pi": sp.pi, "e": sp.E, "sqrt": sp.sqrt, "abs": sp.Abs,
+                            "sin": sp.sin, "cos": sp.cos, "tan": sp.tan, "exp": sp.exp, "log": sp.log,
+                            "sinh": sp.sinh, "cosh": sp.cosh, "tanh": sp.tanh,
+                            "arcsin": sp.asin, "arccos": sp.acos, "arctan": sp.atan, "asin": sp.asin, "acos": sp.acos, "atan": sp.atan,
+                            "arcsinh": sp.asinh, "arccosh": sp.acosh, "arctanh": sp.atanh, "asinh": sp.asinh, "acosh": sp.acosh, "atanh": sp.atanh
+                            }
+        equation = sp.Eq(eval(item_half_1, availableFunctions), eval(item_half_2, availableFunctions))
+        
         if item.count('y') > 0:
-            solution = solve(equation, y)
-            solution = str(solution[0]).replace(" ", "")
+            solution = sp.solve(equation, y)
+            if solution == []:
+                solution = sp.solve(equation, x)
+                solution = str(solution[0]).replace(" ", "")
+                return "x="+solution
+            print(solution) # сделать возвращения нескольких значений
+            solution = str(solution[0]).replace(" ", "").lower()
             return "y="+solution
         elif item.count('x') > 0:
-            solution = solve(equation, x)
-            solution = str(solution[0]).replace(" ", "")
+            solution = sp.solve(equation, x)
+            solution = str(solution[0]).replace(" ", "").lower()
             return "x="+solution
 
     def _exec_func(self, item) -> list[dict, None] | list[None, dict]:
