@@ -7,7 +7,7 @@ from Model.Graphic import Graphic
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
-        self._x = linspace(-22, 22, 501)
+        self._x = linspace(-42, 42, 301)
         
     def draw(self) -> None:
         try:
@@ -26,7 +26,7 @@ class PyplotGraphic(Graphic):
                 if solved_item[0] == 'y':
                     if isinstance(y, int) or isinstance(y, float):
                         y = [y for i in range(len(self._x))]
-                    axes.plot(self._x, y)
+                    axes.plot(self._x.sort(), y)
                 elif solved_item[0] == 'x':
                     if isinstance(x, int) or isinstance(x, float):
                         x = [x for i in range(len(self._x))]
@@ -71,6 +71,8 @@ class PyplotGraphic(Graphic):
             ldic = locals()
             with errstate(divide='ignore', invalid='ignore'):
                 exec(item, globals(), ldic)
+                print(ldic["y"]) # -----------------------------------------------------------
+                print(self._x) # -----------------------------------------------------------
                 return ldic['y'], None
         elif item[0] == 'x':
             y = self._x

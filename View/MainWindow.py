@@ -9,7 +9,6 @@ class MainWindow(IWindow, IObserver):
     def __init__(self):
         self.ui = lu.loadUi("Utilz/Windows/MainWindow.ui")
         self.ui.setFixedSize(self.ui.frameSize().width(), self.ui.frameSize().height())
-        self.ui.setWindowIcon(QIcon("../Utilz/Icons/line-chart.png")) # не работает
 
         urlLink="<a style=\"text-decoration: none\" href=\"https://numpy.org/doc/stable/reference/routines.math.html\">Справочник</a>"
         self.ui.lb_info.setText(urlLink)
