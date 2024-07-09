@@ -23,7 +23,7 @@ class Graphic(IGraphic, IObservable):
         self._observers.remove(observer)
 
     @override
-    def notify(self, message) -> None:
+    def notify(self, message: dict) -> None:
         for observer in self._observers:
             observer.createErrorMessageBox(message)
 

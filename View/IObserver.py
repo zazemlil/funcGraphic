@@ -2,5 +2,5 @@ from abc import ABCMeta, abstractmethod
 
 class IObserver(metaclass=ABCMeta):
     @abstractmethod
-    def createErrorMessageBox(self, message) -> None:
+    def createErrorMessageBox(self, message: dict) -> None:
         pass

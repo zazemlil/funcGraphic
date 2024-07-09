@@ -1,6 +1,8 @@
 from typing import override
 from PyQt6.uic import load_ui as lu
 from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtGui import *
+from PyQt6.QtCore import Qt
 from View.IWindow import IWindow
 from View.IObserver import IObserver
 
@@ -16,12 +18,16 @@ class MainWindow(IWindow, IObserver):
         self.ui.show()
 
     @override
-    def createErrorMessageBox(self, message: Exception) -> None:
+    def createErrorMessageBox(self, message: dict) -> None:
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Warning)
         msg.setText("Ошибка при построении графика! Посмотрите подробную информацию об ошибке (Show Details...).")
-        msg.setDetailedText(str(message))
+        msg.setDetailedText(message['error'] + "\nFunction: " + message['func'])
         msg.setWindowTitle("Error")
+
+        foregroundBrush = QBrush(QColor(255, 0, 0))
+        self.ui.listBox.item(message["index"]).setForeground(foregroundBrush)
+
         msg.exec()
 
     @override

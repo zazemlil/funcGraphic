@@ -34,7 +34,7 @@ class PyplotGraphic(Graphic):
             plt.show()
         except Exception as error:
             #print(f"{error=}, {type(error)=}")
-            self.notify(str(error) + "\nFunction: " + str(item))
+            self.notify({"error": str(error), "func": str(item), "index": self._funcs.index(item)})
                 
     def _exec_func(self, item) -> list[dict, str] | list[str, dict]:
         x = self._x
