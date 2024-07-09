@@ -7,10 +7,14 @@ from Model.Graphic import Graphic
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
-        self._x = linspace(-42, 42, 301)
+        self._x = linspace(-22, 22, 301)
+        self._minX = -24
+        self._maxX = 24
+        self._freq = 301
         
     def draw(self) -> None:
         try:
+            
             # clear previous figures
             plt.close()
             # creating graphic
@@ -26,7 +30,7 @@ class PyplotGraphic(Graphic):
                 if solved_item[0] == 'y':
                     if isinstance(y, int) or isinstance(y, float):
                         y = [y for i in range(len(self._x))]
-                    axes.plot(self._x.sort(), y)
+                    axes.plot(self._x, y)
                 elif solved_item[0] == 'x':
                     if isinstance(x, int) or isinstance(x, float):
                         x = [x for i in range(len(self._x))]
@@ -34,6 +38,7 @@ class PyplotGraphic(Graphic):
 
             # configure and show graphic 
             self._configure_graphic(axes)
+
             plt.show()
         except Exception as error:
             self.notify({"error": str(error), "func": str(item), "index": self._funcs.index(item)})
@@ -90,3 +95,15 @@ class PyplotGraphic(Graphic):
         axes.set_ylabel(self._ylabel, color='gray')
         axes.grid(True)
         axes.legend(self._funcs)
+
+    def set_minX(self, minX: int) -> None:
+        self._minX = minX
+
+    def set_maxX(self, maxX: int) -> None:
+        self._maxX = maxX
+
+    def set_freq(self, freq: int) -> None:
+        self._freq = freq
+
+    def set_x(self) -> None:
+        self._x = linspace(int(self._minX), int(self._maxX), int(self._freq))

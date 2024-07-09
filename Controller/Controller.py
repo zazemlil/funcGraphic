@@ -18,6 +18,8 @@ class Controller:
         self._view.set_signal_text_changed(self._text_changed)
         self._view.set_signal_input_text_editing_finished(self._add)
 
+        self._set_min_max_freq_X()
+
 
     def _add(self) -> None:
         new_item_text = self._view.ui.lineEdit.text()
@@ -44,6 +46,7 @@ class Controller:
     def _show(self) -> None:
         self._view.ui.listBox.blockSignals(True)
         self._set_default_item_color()
+        
         self._model.draw()
         self._view.ui.listBox.blockSignals(False)
 
@@ -62,3 +65,27 @@ class Controller:
         foregroundBrush = QBrush(QColor(0,0,0))
         for i in range(self._view.ui.listBox.count()):
             self._view.ui.listBox.item(i).setForeground(foregroundBrush)
+
+    def _set_min_max_freq_X(self) -> None:
+        minX = self._view.ui.lineEdit_minX.text()
+        maxX = self._view.ui.lineEdit_maxX.text()
+        freq = self._view.ui.lineEdit_freq.text()
+        if minX != "" and minX.isdigit():
+            self._model.set_minX(int(minX))
+        else:
+            self._model.set_minX(-22)
+            self._view.ui.lineEdit_minX.setText("-22")
+
+        if maxX != "" and maxX.isdigit():
+            self._model.set_maxX(int(maxX))
+        else:
+            self._model.set_maxX(-22)
+            self._view.ui.lineEdit_maxX.setText("22")
+        
+        if freq != "" and freq.isdigit():
+            self._model.set_freq(int(freq))
+        else:
+            self._model.set_freq(301)
+            self._view.ui.lineEdit_freq.setText("301")
+
+        #self._model.set_x() # -------------------------------------------------error
