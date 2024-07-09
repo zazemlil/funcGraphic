@@ -9,7 +9,7 @@ class PyplotGraphic(Graphic):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
         self._x = linspace(-22, 22, 301)
         
-    def draw(self):
+    def draw(self) -> None:
         try:
             # clear previous figures
             plt.close()
@@ -33,9 +33,10 @@ class PyplotGraphic(Graphic):
             # showing graphic
             plt.show()
         except Exception as error:
-            print(f"{error=}, {type(error)=}")
+            #print(f"{error=}, {type(error)=}")
+            self.notify(str(error) + "\nFunction: " + str(item))
                 
-    def _exec_func(self, item):
+    def _exec_func(self, item) -> list[dict, str] | list[str, dict]:
         x = self._x
         ldic = locals()
         with errstate(divide='ignore', invalid='ignore'):
@@ -45,7 +46,7 @@ class PyplotGraphic(Graphic):
             else:
                 return "-", ldic['x']
 
-    def _configure_graphic(self, axes):
+    def _configure_graphic(self, axes) -> None:
         fig = plab.gcf()
         fig.canvas.manager.set_window_title(self._window_title)
 

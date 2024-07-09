@@ -1,8 +1,10 @@
 from typing import override
 from PyQt6.uic import load_ui as lu
+from PyQt6.QtWidgets import QMessageBox
 from View.IWindow import IWindow
+from View.IObserver import IObserver
 
-class MainWindow(IWindow):
+class MainWindow(IWindow, IObserver):
     def __init__(self):
         self.ui = lu.loadUi("Utilz/Windows/MainWindow.ui")
         self.ui.setFixedSize(self.ui.frameSize().width(), self.ui.frameSize().height())
@@ -12,6 +14,15 @@ class MainWindow(IWindow):
         self.ui.lb_info.setOpenExternalLinks(True)
 
         self.ui.show()
+
+    @override
+    def createErrorMessageBox(self, message: Exception) -> None:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setText("Ошибка при построении графика! Посмотрите подробную информацию об ошибке (Show Details...).")
+        msg.setDetailedText(str(message))
+        msg.setWindowTitle("Error")
+        msg.exec()
 
     @override
     def set_signal_show_graphic(self, arg):
