@@ -29,7 +29,7 @@ class Graphic(IGraphic, IObservable):
 
     @override
     def add(self, func) -> None:
-        func = func.replace(" ", "")
+        func = func.replace(" ", "").lower()
         self._funcs.append(func)
 
     @override

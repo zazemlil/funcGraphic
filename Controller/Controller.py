@@ -16,7 +16,7 @@ class Controller:
 
     def _add(self) -> None:
         new_item = self._view.ui.lineEdit.text()
-        new_item = new_item.replace(" ", "")
+        new_item = new_item.replace(" ", "").lower()
         if new_item != "":
             self._view.ui.listBox.addItem(new_item)
             self._view.ui.lineEdit.clear()

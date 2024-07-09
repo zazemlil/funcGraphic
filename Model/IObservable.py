@@ -11,5 +11,5 @@ class IObservable(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def notify(self, message) -> dict:
+    def notify(self, message: dict) -> None:
         pass
