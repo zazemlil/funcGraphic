@@ -1,4 +1,4 @@
-from typing import override, List
+from typing import List
 from functools import singledispatchmethod
 from Model.IGraphic import IGraphic
 from Model.IObservable import IObservable
@@ -14,33 +14,26 @@ class Graphic(IGraphic, IObservable):
         self._ylabel = ylabel
         self._funcs = []
 
-    @override
     def attach(self, observer: IObserver) -> None:
         self._observers.append(observer)
 
-    @override
     def detach(self, observer: IObserver) -> None:
         self._observers.remove(observer)
 
-    @override
     def notify(self, message: dict) -> None:
         for observer in self._observers:
             observer.createErrorMessageBox(message)
 
-    @override
     def add(self, func: str) -> None:
         func = func.replace(" ", "").lower()
         self._funcs.append(func)
 
-    @override
     def clear(self) -> None:
         self._funcs = []
 
-    @override
     def change(self, new_func: str, index: int) -> None:
         self._funcs[index] = new_func
 
-    @override
     @singledispatchmethod
     def remove(self, arg) -> None:
         raise NotImplementedError(f"Cannot format value of type {type(arg)}")

@@ -7,18 +7,20 @@ from Model.Graphic import Graphic
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
-        self._x = linspace(-22, 22, 301)
+        #self._x = linspace(-22, 22, 301)
         self._minX = -24
         self._maxX = 24
-        self._freq = 301
+        self._step = 0.5
+        self._x = arange(self._minX, self._maxX+self._step, self._step)
         
     def draw(self) -> None:
         try:
-            
             # clear previous figures
             plt.close()
             # creating graphic
             _, axes = plt.subplots()
+            # configure and show graphic 
+            self._configure_graphic(axes)
             
             # adding graphs
             for item in self._funcs:
@@ -35,9 +37,6 @@ class PyplotGraphic(Graphic):
                     if isinstance(x, int) or isinstance(x, float):
                         x = [x for i in range(len(self._x))]
                     axes.plot(x, self._x)
-
-            # configure and show graphic 
-            self._configure_graphic(axes)
 
             plt.show()
         except Exception as error:
@@ -62,7 +61,6 @@ class PyplotGraphic(Graphic):
                 solution = sp.solve(equation, x)
                 solution = str(solution[0]).replace(" ", "")
                 return "x="+solution
-            print(solution) # сделать возвращения нескольких значений
             solution = str(solution[0]).replace(" ", "").lower()
             return "y="+solution
         elif item.count('x') > 0:
@@ -76,8 +74,6 @@ class PyplotGraphic(Graphic):
             ldic = locals()
             with errstate(divide='ignore', invalid='ignore'):
                 exec(item, globals(), ldic)
-                print(ldic["y"]) # -----------------------------------------------------------
-                print(self._x) # -----------------------------------------------------------
                 return ldic['y'], None
         elif item[0] == 'x':
             y = self._x
@@ -96,14 +92,17 @@ class PyplotGraphic(Graphic):
         axes.grid(True)
         axes.legend(self._funcs)
 
+        self._set_x()
+
     def set_minX(self, minX: int) -> None:
         self._minX = minX
 
     def set_maxX(self, maxX: int) -> None:
         self._maxX = maxX
 
-    def set_freq(self, freq: int) -> None:
-        self._freq = freq
+    def set_freq(self, step: int) -> None:
+        self._step = step
 
-    def set_x(self) -> None:
-        self._x = linspace(int(self._minX), int(self._maxX), int(self._freq))
+    def _set_x(self) -> None:
+        #self._x = linspace(int(self._minX), int(self._maxX), int(self._step))
+        self._x = arange(self._minX, self._maxX+self._step, self._step)

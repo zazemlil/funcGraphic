@@ -46,7 +46,7 @@ class Controller:
     def _show(self) -> None:
         self._view.ui.listBox.blockSignals(True)
         self._set_default_item_color()
-        
+        self._set_min_max_freq_X() # ----------------------------------
         self._model.draw()
         self._view.ui.listBox.blockSignals(False)
 
@@ -69,23 +69,25 @@ class Controller:
     def _set_min_max_freq_X(self) -> None:
         minX = self._view.ui.lineEdit_minX.text()
         maxX = self._view.ui.lineEdit_maxX.text()
-        freq = self._view.ui.lineEdit_freq.text()
-        if minX != "" and minX.isdigit():
-            self._model.set_minX(int(minX))
+        step = self._view.ui.lineEdit_step.text()
+        
+        if minX.isdigit():
+            self._model.set_minX(float(minX))
+            print("minX = ", self._model._minX)
         else:
             self._model.set_minX(-22)
             self._view.ui.lineEdit_minX.setText("-22")
 
-        if maxX != "" and maxX.isdigit():
-            self._model.set_maxX(int(maxX))
+        if maxX.isdigit():
+            self._model.set_maxX(float(maxX))
+            print("maxX = ", self._model._maxX)
         else:
             self._model.set_maxX(-22)
             self._view.ui.lineEdit_maxX.setText("22")
         
-        if freq != "" and freq.isdigit():
-            self._model.set_freq(int(freq))
+        if step.isdigit():
+            self._model.set_freq(float(step))
+            print("step = ", self._model._step)
         else:
-            self._model.set_freq(301)
-            self._view.ui.lineEdit_freq.setText("301")
-
-        #self._model.set_x() # -------------------------------------------------error
+            self._model.set_freq(0.5)
+            self._view.ui.lineEdit_step.setText("0.5")

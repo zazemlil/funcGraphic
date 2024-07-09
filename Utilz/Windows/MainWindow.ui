@@ -57,9 +57,9 @@
     <widget class="QPushButton" name="pb_add">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>160</x>
        <y>340</y>
-       <width>211</width>
+       <width>241</width>
        <height>31</height>
       </rect>
      </property>
@@ -78,9 +78,9 @@
     <widget class="QPushButton" name="pb_remove">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>160</x>
        <y>380</y>
-       <width>211</width>
+       <width>241</width>
        <height>31</height>
       </rect>
      </property>
@@ -139,9 +139,9 @@
     <widget class="QPushButton" name="pb_show">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>160</x>
        <y>460</y>
-       <width>211</width>
+       <width>241</width>
        <height>41</height>
       </rect>
      </property>
@@ -160,9 +160,9 @@
     <widget class="QPushButton" name="pb_clear">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>160</x>
        <y>420</y>
-       <width>211</width>
+       <width>241</width>
        <height>31</height>
       </rect>
      </property>
@@ -194,7 +194,7 @@
     <widget class="QLineEdit" name="lineEdit_minX">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>80</x>
        <y>370</y>
        <width>61</width>
        <height>20</height>
@@ -248,7 +248,7 @@
     <widget class="QLineEdit" name="lineEdit_maxX">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>80</x>
        <y>410</y>
        <width>61</width>
        <height>20</height>
@@ -261,12 +261,12 @@
       </font>
      </property>
     </widget>
-    <widget class="QLabel" name="lb_freq">
+    <widget class="QLabel" name="lb_step">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>450</y>
-       <width>81</width>
+       <width>41</width>
        <height>16</height>
       </rect>
      </property>
@@ -277,13 +277,13 @@
       </font>
      </property>
      <property name="text">
-      <string>frequency =</string>
+      <string>step =</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_freq">
+    <widget class="QLineEdit" name="lineEdit_step">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>80</x>
        <y>450</y>
        <width>61</width>
        <height>20</height>
