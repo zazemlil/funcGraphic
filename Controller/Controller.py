@@ -1,5 +1,8 @@
 from View.MainWindow import MainWindow
 from Model.PyplotGraphic import PyplotGraphic
+from PyQt6.QtCore import *
+from PyQt6.QtWidgets import QListWidgetItem
+from PyQt6.QtGui import *
 
 class Controller:
     def __init__(self):
@@ -12,15 +15,18 @@ class Controller:
         self._view.set_signal_remove(self._remove)
         self._view.set_signal_show_graphic(self._show)
         self._view.set_signal_clear(self._clear)
+        self._view.set_signal_text_changed(self._text_changed)
 
 
     def _add(self) -> None:
-        new_item = self._view.ui.lineEdit.text()
-        new_item = new_item.replace(" ", "").lower()
-        if new_item != "":
-            self._view.ui.listBox.addItem(new_item)
+        new_item_text = self._view.ui.lineEdit.text()
+        new_item_text = new_item_text.replace(" ", "").lower()
+        if new_item_text != "":
+            item = QListWidgetItem(new_item_text)
+            item.setFlags(Qt.ItemFlag.ItemIsEditable | Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
+            self._view.ui.listBox.addItem(item)
             self._view.ui.lineEdit.clear()
-            self._model.add(new_item)
+            self._model.add(new_item_text)
 
 
     def _remove(self) -> None:
@@ -35,4 +41,23 @@ class Controller:
         self._model.clear()
 
     def _show(self) -> None:
+        self._view.ui.listBox.blockSignals(True)
+        self._set_default_item_color()
         self._model.draw()
+        self._view.ui.listBox.blockSignals(False)
+
+    def _text_changed(self, item) -> None:
+        self._view.ui.listBox.blockSignals(True)
+
+        item.setText(item.text().replace(" ", ""))
+        index = self._view.ui.listBox.indexFromItem(item).row()
+        self._model.change(item.text(), index)
+        foregroundBrush = QBrush(QColor(255,165,0))
+        self._view.ui.listBox.item(index).setForeground(foregroundBrush)
+
+        self._view.ui.listBox.blockSignals(False)
+
+    def _set_default_item_color(self) -> None:
+        foregroundBrush = QBrush(QColor(0,0,0))
+        for i in range(self._view.ui.listBox.count()):
+            self._view.ui.listBox.item(i).setForeground(foregroundBrush)

@@ -31,17 +31,21 @@ class MainWindow(IWindow, IObserver):
         msg.exec()
 
     @override
-    def set_signal_show_graphic(self, arg):
+    def set_signal_show_graphic(self, arg) -> None:
         self.ui.pb_show.clicked.connect(arg)
 
     @override
-    def set_signal_add(self, arg):
+    def set_signal_add(self, arg) -> None:
         self.ui.pb_add.clicked.connect(arg)
 
     @override
-    def set_signal_remove(self, arg):
+    def set_signal_remove(self, arg) -> None:
         self.ui.pb_remove.clicked.connect(arg)
 
     @override
-    def set_signal_clear(self, arg):
+    def set_signal_clear(self, arg) -> None:
         self.ui.pb_clear.clicked.connect(arg)
+
+    @override
+    def set_signal_text_changed(self, arg) -> None:
+        self.ui.listBox.itemChanged.connect(arg)

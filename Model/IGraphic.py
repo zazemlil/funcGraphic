@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 class IGraphic(metaclass=ABCMeta):
     @abstractmethod
-    def add(self, func) -> None:
+    def add(self, func: str) -> None:
         pass
 
     @abstractmethod
@@ -10,7 +10,11 @@ class IGraphic(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def remove(self, arg) -> None:
+    def remove(self, arg: int | str) -> None:
+        pass
+
+    @abstractmethod
+    def change(self, new_func: str, index: int) -> None:
         pass
 
     @abstractmethod

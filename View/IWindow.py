@@ -16,3 +16,7 @@ class IWindow(metaclass=ABCMeta):
     @abstractmethod
     def set_signal_clear(self, arg) -> None:
         pass
+
+    @abstractmethod
+    def set_signal_text_changed(self, arg) -> None:
+        pass
