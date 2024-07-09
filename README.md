@@ -3,6 +3,8 @@
 3. https://www.youtube.com/watch?v=A_s5D-k6evo
 4. https://stackoverflow.com/questions/51881535/view-to-controller-communication-in-mvc
 
+python -m venv
+
 pip freeze > requirements.txt
 
 pip install -r requirements.txt
