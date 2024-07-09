@@ -16,6 +16,7 @@ class Controller:
         self._view.set_signal_show_graphic(self._show)
         self._view.set_signal_clear(self._clear)
         self._view.set_signal_text_changed(self._text_changed)
+        self._view.set_signal_input_text_editing_finished(self._add)
 
 
     def _add(self) -> None:

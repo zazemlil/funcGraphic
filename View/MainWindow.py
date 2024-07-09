@@ -49,3 +49,7 @@ class MainWindow(IWindow, IObserver):
     @override
     def set_signal_text_changed(self, arg) -> None:
         self.ui.listBox.itemChanged.connect(arg)
+
+    @override
+    def set_signal_input_text_editing_finished(self, arg) -> None:
+        self.ui.lineEdit.editingFinished.connect(arg)
