@@ -44,6 +44,7 @@ class PyplotGraphic(Graphic):
                 
     def _solve_func(self, item) -> str:
         x, y = sp.symbols('x y')
+        item = item.replace("^", "**")
         item_half_1, item_half_2 = item[ : item.find("=")], item[item.find("=") + 1 : ]
         
         availableFunctions = {
@@ -62,6 +63,7 @@ class PyplotGraphic(Graphic):
                 solution = str(solution[0]).replace(" ", "")
                 return "x="+solution
             solution = str(solution[0]).replace(" ", "").lower()
+            print(solution)
             return "y="+solution
         elif item.count('x') > 0:
             solution = sp.solve(equation, x)
