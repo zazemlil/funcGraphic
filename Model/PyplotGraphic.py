@@ -8,8 +8,8 @@ class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
         #self._x = linspace(-22, 22, 301)
-        self._minX = -24
-        self._maxX = 24
+        self._minX = -22.0
+        self._maxX = 22.0
         self._step = 0.5
         self._x = arange(self._minX, self._maxX+self._step, self._step)
         
@@ -94,14 +94,14 @@ class PyplotGraphic(Graphic):
 
         self._set_x()
 
-    def set_minX(self, minX: int) -> None:
-        self._minX = minX
+    def set_minX(self, minX: float) -> None:
+        self._minX = float(minX)
 
-    def set_maxX(self, maxX: int) -> None:
-        self._maxX = maxX
+    def set_maxX(self, maxX: float) -> None:
+        self._maxX = float(maxX)
 
-    def set_freq(self, step: int) -> None:
-        self._step = step
+    def set_freq(self, step: float) -> None:
+        self._step = float(step)
 
     def _set_x(self) -> None:
         #self._x = linspace(int(self._minX), int(self._maxX), int(self._step))

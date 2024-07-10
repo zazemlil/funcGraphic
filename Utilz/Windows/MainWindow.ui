@@ -71,6 +71,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(203, 255, 199);</string>
+     </property>
      <property name="text">
       <string>Добавить функцию</string>
      </property>
@@ -92,6 +95,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 184, 185);</string>
+     </property>
      <property name="text">
       <string>Удалить функцию</string>
      </property>
@@ -99,9 +105,9 @@
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>100</x>
        <y>290</y>
-       <width>321</width>
+       <width>301</width>
        <height>41</height>
       </rect>
      </property>
@@ -120,14 +126,14 @@
       <rect>
        <x>10</x>
        <y>290</y>
-       <width>81</width>
+       <width>91</width>
        <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Calibri</family>
-       <pointsize>12</pointsize>
+       <pointsize>16</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -142,7 +148,7 @@
        <x>160</x>
        <y>460</y>
        <width>241</width>
-       <height>41</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="font">
@@ -173,6 +179,9 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(184, 184, 184);</string>
      </property>
      <property name="text">
       <string>Очистить всё</string>
@@ -294,6 +303,25 @@
        <family>Calibri</family>
        <pointsize>10</pointsize>
       </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_recommend">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>480</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Calibri</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>(recommended step = 0.5)</string>
      </property>
     </widget>
    </widget>

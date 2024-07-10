@@ -70,24 +70,22 @@ class Controller:
         minX = self._view.ui.lineEdit_minX.text()
         maxX = self._view.ui.lineEdit_maxX.text()
         step = self._view.ui.lineEdit_step.text()
-        
-        if minX.isdigit():
+
+        if minX.lstrip("-").isdigit():
             self._model.set_minX(float(minX))
-            print("minX = ", self._model._minX)
         else:
             self._model.set_minX(-22)
             self._view.ui.lineEdit_minX.setText("-22")
 
-        if maxX.isdigit():
+        if maxX.lstrip("-").isdigit():
             self._model.set_maxX(float(maxX))
-            print("maxX = ", self._model._maxX)
         else:
             self._model.set_maxX(-22)
             self._view.ui.lineEdit_maxX.setText("22")
         
-        if step.isdigit():
+        step1 = step
+        if step1.replace(".", "").isdigit():
             self._model.set_freq(float(step))
-            print("step = ", self._model._step)
         else:
             self._model.set_freq(0.5)
             self._view.ui.lineEdit_step.setText("0.5")
