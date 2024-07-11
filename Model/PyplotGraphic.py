@@ -61,25 +61,29 @@ class PyplotGraphic(Graphic):
             if solution == []:
                 solution = sp.solve(equation, x)
                 solution = str(solution[0]).replace(" ", "")
+                print("x=", solution)
                 return "x="+solution
             solution = str(solution[0]).replace(" ", "").lower()
-            print(solution)
+            print("y=", solution)
             return "y="+solution
         elif item.count('x') > 0:
             solution = sp.solve(equation, x)
             solution = str(solution[0]).replace(" ", "").lower()
+            print("x=", solution)
             return "x="+solution
 
     def _exec_func(self, item) -> list[dict, None] | list[None, dict]:
+        ldic = {"acos": arccos, "asin": arcsin, "atan": arctan,
+                "asinh": arcsinh, "acosh": arccosh, "atanh": arctanh}
         if item[0] == 'y':
             x = self._x
-            ldic = locals()
+            ldic.update(locals())
             with errstate(divide='ignore', invalid='ignore'):
                 exec(item, globals(), ldic)
                 return ldic['y'], None
         elif item[0] == 'x':
             y = self._x
-            ldic = locals()
+            ldic.update(locals())
             with errstate(divide='ignore', invalid='ignore'):
                 exec(item, globals(), ldic)
                 return None, ldic['x']
