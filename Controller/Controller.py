@@ -46,7 +46,7 @@ class Controller:
     def _show(self) -> None:
         self._view.ui.listBox.blockSignals(True)
         self._set_default_item_color()
-        self._set_min_max_freq_X() # ----------------------------------
+        self._set_min_max_freq_X()
         self._model.draw()
         self._view.ui.listBox.blockSignals(False)
 
