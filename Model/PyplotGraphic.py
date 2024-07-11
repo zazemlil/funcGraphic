@@ -7,7 +7,6 @@ from Model.Graphic import Graphic
 class PyplotGraphic(Graphic):
     def __init__(self, window_title, graphic_title, xlabel, ylabel):
         super().__init__(window_title, graphic_title, xlabel, ylabel)
-        #self._x = linspace(-22, 22, 301)
         self._minX = -22.0
         self._maxX = 22.0
         self._step = 0.5
@@ -19,8 +18,8 @@ class PyplotGraphic(Graphic):
             plt.close()
             # creating graphic
             _, axes = plt.subplots()
-            # configure and show graphic 
-            self._configure_graphic(axes)
+
+            self._set_x()
             
             # adding graphs
             for item in self._funcs:
@@ -37,6 +36,9 @@ class PyplotGraphic(Graphic):
                     if isinstance(x, int) or isinstance(x, float):
                         x = [x for i in range(len(self._x))]
                     axes.plot(x, self._x)
+
+            # configure and show graphic 
+            self._configure_graphic(axes)
 
             plt.show()
         except Exception as error:
@@ -98,8 +100,6 @@ class PyplotGraphic(Graphic):
         axes.grid(True)
         axes.legend(self._funcs)
 
-        self._set_x()
-
     def set_minX(self, minX: float) -> None:
         self._minX = float(minX)
 
@@ -110,5 +110,4 @@ class PyplotGraphic(Graphic):
         self._step = float(step)
 
     def _set_x(self) -> None:
-        #self._x = linspace(int(self._minX), int(self._maxX), int(self._step))
         self._x = arange(self._minX, self._maxX+self._step, self._step)
